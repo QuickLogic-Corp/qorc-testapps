@@ -1,7 +1,7 @@
-QuickFeather HelloWorld HW (Cortex M4 + FPGA) Application - Separated
+QuickFeather HelloWorld SW (Cortex M4 + FPGA) Application - Separated
 =====================================================================
 
-This test/example contains the :code:`qf_helloworldhw` example, but with the fpga design (usb2serial) available as a separate binary, and the m4 code alone compiled into a separate binary.
+This test/example contains the :code:`qf_helloworldsw` example, but with the fpga design (usb2serial) available as a separate binary, and the m4 code alone compiled into a separate binary.
 
 The original example has the m4 code include the fpga code (in a C header form) into a single m4 binary.
 
