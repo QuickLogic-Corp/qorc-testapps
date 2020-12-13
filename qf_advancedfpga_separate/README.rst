@@ -115,6 +115,7 @@ How To
   - Set the board in programming mode.
 
   - | Flash both the m4 and fpga binaries using (from the :code:`GCC_Project` directory)
+  
     ::
 
       qfprog --port /dev/ttyACM0 --m4app output/bin/qf_advancedfpga_separate.bin --appfpga ../fpga/rtl/AL4S3B_FPGA_top.bin --mode fpga-m4
