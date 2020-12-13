@@ -76,7 +76,7 @@ How To
     
     ::
 
-      :code:`ql_symbiflow -compile -src fpga/rtl -d ql-eos-s3 -t helloworldfpga -v *.v -p quickfeather.pcf -P PU64 -dump binary`
+      ql_symbiflow -compile -src fpga/rtl -d ql-eos-s3 -t helloworldfpga -v *.v -p quickfeather.pcf -P PU64 -dump binary
     
     | from this application's root directory
     | The binary will be generated as : :code:`fpga/rtl/helloworldfpga.bin`
@@ -90,7 +90,7 @@ How To
     
     ::
       
-      :code:`qfprog --port /dev/ttyACM0 --appfpga fpga/rtl/helloworldfpga.bin --mode fpga`
+      qfprog --port /dev/ttyACM0 --appfpga fpga/rtl/helloworldfpga.bin --mode fpga
     
     | Note the :code:`--mode` option at the end, which is now mandatory - this specifies the operating mode which the bootloader uses.
     | :code:`--mode fpga` ensures that the bootloader knows that only the appfpga binary is flashed, and it will load the flashed appfpga binary only.
