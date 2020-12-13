@@ -88,13 +88,21 @@ How To
   - | Initialize the FPGA toolchain to use.
     |
     | Export the environment variable :code:`$INSTALL_DIR` using:
-    | :code:`export INSTALL_DIR=/path/to/fpga/toolchain`
+    
+    ::
+    
+      export INSTALL_DIR=/path/to/fpga/toolchain
+      
     | where :code:`$INSTALL_DIR` points to the base path of the FPGA toolchain install directory
-    | Initialize the conda env for the toolchain using:
-    | :code:`export PATH="$INSTALL_DIR/quicklogic-arch-defs/bin:$INSTALL_DIR/quicklogic-arch-defs/bin/python:$PATH"`
-    | :code:`source "$INSTALL_DIR/conda/etc/profile.d/conda.sh"`
-    | :code:`conda activate`
     |
+    | Initialize the conda env for the toolchain using:
+    
+    ::
+    
+     export PATH="$INSTALL_DIR/quicklogic-arch-defs/bin:$INSTALL_DIR/quicklogic-arch-defs/bin/python:$PATH"
+     source "$INSTALL_DIR/conda/etc/profile.d/conda.sh"
+     conda activate
+    
 
 - Build:
 
@@ -104,9 +112,10 @@ How To
 
 - Flash:
 
-  - | Flash both the m4 and fpga binaries using (from the :code:`GCC_Project` directory) ::
+  - | Flash both the m4 and fpga binaries using (from the :code:`GCC_Project` directory)
+    ::
 
-        qfprog --port /dev/ttyACM0 --m4app output/bin/qf_advancedfpga_separate.bin --appfpga ../fpga/rtl/AL4S3B_FPGA_top.bin --mode fpga-m4
+      qfprog --port /dev/ttyACM0 --m4app output/bin/qf_advancedfpga_separate.bin --appfpga ../fpga/rtl/AL4S3B_FPGA_top.bin --mode fpga-m4
 
     | Note the :code:`--mode` option at the end, which is now mandatory - this specifies the operating mode which the bootloader uses.
     | :code:`--mode fpga-m4` (or equivalently :code:`--mode m4-fpga`) ensures that the bootloader knows that both m4app binary and the appfpga binary are flashed, and it will load the flashed appfpga binary and then load the m4app binary.
@@ -130,15 +139,15 @@ How To
     | :code:`ledctlr` test sequence:
     | At the :code:`[0] >` prompt, which is the level 0 prompt, use: 
 
-      1. :code:`ledctlr` to enter the submenu
-      2. :code:`color0 1` sets the color0 (for timeslot0) to blue, you should see the blue led turn on
-      3. :code:`color1 2` sets the color1 (for timeslot1) to green, no visible change
-      4. :code:`color2 4` sets the color2 (for timeslot2) to red, no visible change
-      5. :code:`duration0 500` sets the duration of timeslot0 (for color0)
-      6. | :code:`duration1 500` sets the duration of timeslot1 (for color1)
-         | Now, color0(blue) should be seen for 500ms, and color1(green) should be seen for 500ms and should repeat.
-      7. | :code:`duration2 1000` sets the duration of timeslot2 (for color2)
-         | Now, color0(blue) for 500ms, color1(green) for 500ms and color2(red) for 1000ms should be seen, and should repeat.
+    1. :code:`ledctlr` to enter the submenu
+    2. :code:`color0 1` sets the color0 (for timeslot0) to blue, you should see the blue led turn on
+    3. :code:`color1 2` sets the color1 (for timeslot1) to green, no visible change
+    4. :code:`color2 4` sets the color2 (for timeslot2) to red, no visible change
+    5. :code:`duration0 500` sets the duration of timeslot0 (for color0)
+    6. | :code:`duration1 500` sets the duration of timeslot1 (for color1)
+       | Now, color0(blue) should be seen for 500ms, and color1(green) should be seen for 500ms and should repeat.
+    7. | :code:`duration2 1000` sets the duration of timeslot2 (for color2)
+       | Now, color0(blue) for 500ms, color1(green) for 500ms and color2(red) for 1000ms should be seen, and should repeat.
 
 
 Notes
