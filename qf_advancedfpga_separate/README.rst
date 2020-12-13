@@ -112,6 +112,8 @@ How To
 
 - Flash:
 
+  - Set the board in programming mode.
+
   - | Flash both the m4 and fpga binaries using (from the :code:`GCC_Project` directory)
     ::
 

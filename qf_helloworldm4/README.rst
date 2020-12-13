@@ -60,12 +60,14 @@ How To
     |
     | Toggle LEDs:
     | At the :code:`[0] >` prompt, which is the level 0 prompt, use:
-    | :code:`diag red` to toggle the red led
-    | :code:`diag green` to toggle the green led
-    | :code:`diag blue` to toggle the blue led
-    |
+    
+      - :code:`diag red` to toggle the red led
+      - :code:`diag green` to toggle the green led
+      - :code:`diag blue` to toggle the blue led
+    
     | Detect USR button press:
-    | At the :code:`[0] >` prompt, which is the level 0 prompt, do:    
-    | Keep the USR button pressed (connected to IO_6 on QuickFeather) and execute: :code:`diag userbutton` to check state - it should show :code:`TODO fill the ouput here`
-    | Without the USR button pressed, :code:`diag userbutton` should show: :code:`TODO fill the output here`
-    | 
+    | At the :code:`[0] >` prompt, which is the level 0 prompt, do: 
+
+      - Keep the USR button pressed (connected to IO_6 on QuickFeather) and execute: :code:`diag userbutton` to check state - it should show :code:`TODO fill the ouput here`
+      - Without the USR button pressed, :code:`diag userbutton` should show: :code:`TODO fill the output here`
+    

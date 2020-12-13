@@ -55,29 +55,46 @@ How To
   - | Initialize the FPGA toolchain to use.
     |
     | Export the environment variable :code:`$INSTALL_DIR` using:
-    | :code:`export INSTALL_DIR=/path/to/fpga/toolchain`
+    
+    ::
+    
+      export INSTALL_DIR=/path/to/fpga/toolchain
+      
     | where :code:`$INSTALL_DIR` points to the base path of the FPGA toolchain install directory
-    | Initialize the conda env for the toolchain using:
-    | :code:`export PATH="$INSTALL_DIR/quicklogic-arch-defs/bin:$INSTALL_DIR/quicklogic-arch-defs/bin/python:$PATH"`
-    | :code:`source "$INSTALL_DIR/conda/etc/profile.d/conda.sh"`
-    | :code:`conda activate`
     |
+    | Initialize the conda env for the toolchain using:
+    
+    ::
+    
+     export PATH="$INSTALL_DIR/quicklogic-arch-defs/bin:$INSTALL_DIR/quicklogic-arch-defs/bin/python:$PATH"
+     source "$INSTALL_DIR/conda/etc/profile.d/conda.sh"
+     conda activate
 
 - Build:
 
   - | Build the FPGA design using :
-    | :code:`ql_symbiflow -compile -src fpga/rtl -d ql-eos-s3 -t helloworldfpga -v *.v -p quickfeather.pcf -P PU64 -dump binary`
+    
+    ::
+
+      :code:`ql_symbiflow -compile -src fpga/rtl -d ql-eos-s3 -t helloworldfpga -v *.v -p quickfeather.pcf -P PU64 -dump binary`
+    
     | from this application's root directory
     | The binary will be generated as : :code:`fpga/rtl/helloworldfpga.bin`
     |
 
 - Flash:
 
+  - Set the board in programming mode.
+
   - | Flash the fpga binary using (from the application root directory)
-    | :code:`qfprog --port /dev/ttyACM0 --appfpga fpga/rtl/helloworldfpga.bin --mode fpga`
-    |
+    
+    ::
+      
+      :code:`qfprog --port /dev/ttyACM0 --appfpga fpga/rtl/helloworldfpga.bin --mode fpga`
+    
     | Note the :code:`--mode` option at the end, which is now mandatory - this specifies the operating mode which the bootloader uses.
     | :code:`--mode fpga` ensures that the bootloader knows that only the appfpga binary is flashed, and it will load the flashed appfpga binary only.
+    |
 
 - Run:
 

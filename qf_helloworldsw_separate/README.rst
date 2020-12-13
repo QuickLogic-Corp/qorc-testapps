@@ -35,7 +35,9 @@ How To
 
   - the binary format file :code:`fpga/usb2serial_fpga.bin` is available in this project - this is the usb2serial fpga binary that the bootloader can load.
   
-  - Flash both the m4 and fpga binaries using (from the :code:`GCC_Project` directory) ::
+  - Flash both the m4 and fpga binaries using (from the :code:`GCC_Project` directory) 
+    
+    ::
 
       qfprog --port /dev/ttyACM0 --m4app output/bin/qf_helloworldsw_separate.bin --appfpga ../fpga/usb2serial_fpga.bin --mode fpga-m4
 
@@ -66,7 +68,7 @@ How To
     
     | Detect USR button press:
     | At the :code:`[0] >` prompt, which is the level 0 prompt, do: 
-    
+
       - Keep the USR button pressed (connected to IO_6 on QuickFeather) and execute: :code:`diag userbutton` to check state - it should show :code:`TODO fill the ouput here`
       - Without the USR button pressed, :code:`diag userbutton` should show: :code:`TODO fill the output here`
     
