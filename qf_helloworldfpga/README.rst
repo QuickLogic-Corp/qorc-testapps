@@ -1,8 +1,9 @@
-QuickFeather HelloWorld FPGA Application
-========================================
+QuickFeather HelloWorldFPGA Application
+=======================================
 
-This test/example contains the the fpga design available as an independent component.
+This test/example contains the the fpga design available as an independent component, it is basically only the FPGA part of the :code:`qf_apps/qf_helloworldhw` application project.
 
+The FPGA design is a simple LED-toggle, which toggles the green LED regularly.
 
 How To
 ------
@@ -17,7 +18,7 @@ How To
 
   - | Update the bootloader to the latest from `qorc-sdk <https://github.com/QuickLogic-Corp/qorc-sdk>`_ :code:`master`
     |
-    | Clone the repo, or update it to latest using:
+    | Clone the qorc-sdk repo, or update it to latest using:
     | :code:`git checkout master && git pull`
     | Build the :code:`qf_bootloader` app as usual using :code:`make` from :code:`qf_apps/qf_bootloader/GCC_Project` directory
     | Flash the built bootloader bin using:
@@ -27,7 +28,7 @@ How To
   - | Ensure to use the latest FPGA toolchain which supports generation of FPGA binary (v1.3.1 or above)
     |
     | Alternatively, FPGA toolchain daily build can be setup as below:
-    
+
     ::
       
       export INSTALL_DIR=/path/to/fpga/toolchain/install
@@ -62,15 +63,24 @@ How To
     | :code:`conda activate`
     |
 
-- | Build the FPGA design using :
-  | :code:`ql_symbiflow -compile -src fpga/rtl -d ql-eos-s3 -t helloworldfpga -v *.v -p quickfeather.pcf -P PU64 -dump binary`
-  | from this application's root directory
-  | The binary will be generated as : :code:`fpga/rtl/helloworldfpga.bin`
-  |
+- Build:
 
-- | Flash the fpga binary using (from the application root directory)
-  | :code:`qfprog --port /dev/ttyACM0 --appfpga fpga/rtl/helloworldfpga.bin --mode fpga`
-  |
+  - | Build the FPGA design using :
+    | :code:`ql_symbiflow -compile -src fpga/rtl -d ql-eos-s3 -t helloworldfpga -v *.v -p quickfeather.pcf -P PU64 -dump binary`
+    | from this application's root directory
+    | The binary will be generated as : :code:`fpga/rtl/helloworldfpga.bin`
+    |
 
-- | Note the :code:`--mode` option at the end, which is now mandatory - this specifies the operating mode which the bootloader uses.
-  | :code:`--mode fpga` ensures that the bootloader knows that only the appfpga binary is flashed, and it will load the flashed appfpga binary only.
+- Flash:
+
+  - | Flash the fpga binary using (from the application root directory)
+    | :code:`qfprog --port /dev/ttyACM0 --appfpga fpga/rtl/helloworldfpga.bin --mode fpga`
+    |
+    | Note the :code:`--mode` option at the end, which is now mandatory - this specifies the operating mode which the bootloader uses.
+    | :code:`--mode fpga` ensures that the bootloader knows that only the appfpga binary is flashed, and it will load the flashed appfpga binary only.
+
+- Run:
+
+  - Reset the board, the appfpga should get loaded by the bootloader and start running.
+
+  - You should see the green LED regularly toggling once the appfpga starts running.
