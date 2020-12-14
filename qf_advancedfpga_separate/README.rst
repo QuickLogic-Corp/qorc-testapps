@@ -115,7 +115,7 @@ How To
   - Set the board in programming mode.
 
   - | Flash both the m4 and fpga binaries using (from the :code:`GCC_Project` directory)
-  
+
     ::
 
       qfprog --port /dev/ttyACM0 --m4app output/bin/qf_advancedfpga_separate.bin --appfpga ../fpga/rtl/AL4S3B_FPGA_top.bin --mode fpga-m4
@@ -133,9 +133,21 @@ How To
 
   - Reset the board, the appfgpa and m4app should get loaded by the bootloader and start running.
 
-  - You should see a banner similar to below on the EOS S3 UART: ::
+  - You should see a banner similar to below on the EOS S3 UART: 
+    ::
 
-      TODO, fill the banner printout here.
+      ##########################
+      Quicklogic QuickFeather Advanced FPGA Example
+      SW Version: qorc-sdk/qf_apps/qf_advancedfpga
+      Sep 20 2020 14:24:43
+      ##########################
+    
+      #*******************
+      Command Line Interface
+      App SW Version: qorc-sdk/qf_apps/qf_advancedfpga
+      #*******************
+      [0] >
+
 
   - | The :code:`ledctlr` submenu option is available, and can be used to set RGB led to change color at specific intervals.
     |

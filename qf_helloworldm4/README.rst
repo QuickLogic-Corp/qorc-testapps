@@ -52,9 +52,22 @@ How To
 
   - Reset the board, the m4app should get loaded by the bootloader and start running.
 
-  - You should see a banner similar to below on the EOS S3 UART: ::
+  - You should see a banner similar to below on the EOS S3 UART:  
+  
+    ::
 
-      TODO, fill the banner printout here.
+      ##########################
+      Quicklogic QuickFeather M4 standalone
+      SW Version: qorc-sdk/qf_apps/qf_helloworldm4
+      Sep 20 2020 14:24:43
+      ##########################
+    
+      #*******************
+      Command Line Interface
+      App SW Version: qorc-sdk/qf_apps/qf_helloworldm4
+      #*******************
+      [0] >
+
 
   - | The :code:`diag` submenu option is available, and can be used to toggle the RGB leds or detect the USR button press:
     |

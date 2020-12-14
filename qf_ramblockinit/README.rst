@@ -127,9 +127,21 @@ The implementation of the FPGA Loader API can be found in :code:`qorc-sdk/Librar
   - Reset the board, m4app should get loaded by the bootloader and start running.
 
   - You should see a banner similar to below on the EOS S3 UART: 
+
     ::
 
-      TODO, fill the banner printout here.
+      ##########################
+      Quicklogic QuickFeather RAM Init Test
+      SW Version: qorc-sdk/qf_testapps/qf_ramblockinit
+      Sep 20 2020 14:24:43
+      ##########################
+    
+      #*******************
+      Command Line Interface
+      App SW Version: qorc-sdk/qf_testapps/qf_ramblockinit
+      #*******************
+      [0] >
+
 
   - | If there are any errors in the RAM initialization, you would see :code:`FPGA Load Failed!`
     | Hopefully, you would not get a chance to see this message...
