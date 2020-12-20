@@ -16,15 +16,16 @@ How To
     | Refer to `TinyFPGAProgrammer-Application <https://github.com/QuickLogic-Corp/TinyFPGA-Programmer-Application>`_ for details on changes.
     |
 
-  - | Update the bootloader to the latest from `qorc-sdk <https://github.com/QuickLogic-Corp/qorc-sdk>`_ :code:`master`
-    |
-    | Clone the repo, or update it to latest using:
-    | :code:`git checkout master && git pull`
-    | Build the :code:`qf_bootloader` app as usual using :code:`make` from :code:`qf_apps/qf_bootloader/GCC_Project` directory
-    | Flash the built bootloader bin using:
-    | :code:`qfprog --bootloader output/bin/qf_bootloader.bin` from :code:`qf_apps/qf_bootloader/GCC_Project` directory
-    |
-
+  - | Update the bootloader to the latest from `qorc-sdk <https://github.com/QuickLogic-Corp/qorc-sdk>`_ :code:`master`, if not already done.
+    
+    - | Clone the repo, or update it to latest using:
+      | :code:`git checkout master && git pull`
+    
+    - Build the :code:`qf_bootloader` app as usual using :code:`make` from :code:`qf_apps/qf_bootloader/GCC_Project` directory
+     
+    - | Flash the built bootloader bin using:
+      | :code:`qfprog --bootloader output/bin/qf_bootloader.bin --mode fpga-m4` from :code:`qf_apps/qf_bootloader/GCC_Project` directory
+    
 - Build:
 
   - Build this application as usual using :code:`make` from the :code:`GCC_Project` directory

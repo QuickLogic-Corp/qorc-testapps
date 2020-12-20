@@ -38,6 +38,12 @@ Other changes from the :code:`qf_advancedfpga` application:
             .cfg_state = PI_NO_CFG,
         },
 
+Note also that the clock settings for the FPGA domain need to be set correctly from the M4 code.
+
+Most FPGA designs will use clocks C16 and C21 and these must be kept at appropriate frequencies, depending on FPGA design
+
+For this particular design, we need both C16 and C21 at 12MHz, which is done in :code:`fpga_ledctlr.c`
+
 How To
 ------
 
@@ -49,61 +55,19 @@ How To
     | Refer to `TinyFPGAProgrammer-Application <https://github.com/QuickLogic-Corp/TinyFPGA-Programmer-Application>`_ for details on changes.
     |
 
-  - | Update the bootloader to the latest from `qorc-sdk <https://github.com/QuickLogic-Corp/qorc-sdk>`_ :code:`master`
-    |
-    | Clone the repo, or update it to latest using:
-    | :code:`git checkout master && git pull`
-    | Build the :code:`qf_bootloader` app as usual using :code:`make` from :code:`qf_apps/qf_bootloader/GCC_Project` directory
-    | Flash the built bootloader bin using:
-    | :code:`qfprog --bootloader output/bin/qf_bootloader.bin` from :code:`qf_apps/qf_bootloader/GCC_Project` directory
-    |
-
-  - | Ensure to use the latest FPGA toolchain which supports generation of FPGA binary (v1.3.1 or above)
-    |
-    | Alternatively, FPGA toolchain daily build can be setup as below:
+  - | Update the bootloader to the latest from `qorc-sdk <https://github.com/QuickLogic-Corp/qorc-sdk>`_ :code:`master`, if not already done.
     
-    ::
-      
-      export INSTALL_DIR=/path/to/fpga/toolchain/install
-      wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O conda_installer.sh
-      bash conda_installer.sh -b -p $INSTALL_DIR/conda && rm conda_installer.sh
-      source "$INSTALL_DIR/conda/etc/profile.d/conda.sh"
-      echo "include-system-site-packages=false" >> $INSTALL_DIR/conda/pyvenv.cfg
-      CONDA_FLAGS="-y --override-channels -c defaults -c conda-forge"
-      conda update $CONDA_FLAGS -q conda
-      curl $(curl https://storage.googleapis.com/symbiflow-arch-defs-install/latest) > arch.tar.gz
-      tar -C $INSTALL_DIR -xvf arch.tar.gz && rm arch.tar.gz
-      conda install $CONDA_FLAGS -c quicklogic-corp/label/ql yosys="0.8.0_0002_gc3b38fdc 20200901_073908" python=3.7
-      conda install $CONDA_FLAGS -c quicklogic-corp/label/ql yosys-plugins="1.2.0_0009_g9ab211c 20201001_121833"
-      conda install $CONDA_FLAGS -c quicklogic-corp/label/ql vtr="v8.0.0_rc2_2894_gdadca7ecf 20201008_140004"
-      conda install $CONDA_FLAGS -c quicklogic-corp iverilog
-      conda install $CONDA_FLAGS -c tfors gtkwave
-      conda install $CONDA_FLAGS make lxml simplejson intervaltree git pip
-      conda activate
-      pip install python-constraint
-      pip install serial
-      pip install git+https://github.com/QuickLogic-Corp/quicklogic-fasm
-      conda deactivate
+    - | Clone the repo, or update it to latest using:
+      | :code:`git checkout master && git pull`
     
-  - | Initialize the FPGA toolchain to use.
-    |
-    | Export the environment variable :code:`$INSTALL_DIR` using:
-    
-    ::
-    
-      export INSTALL_DIR=/path/to/fpga/toolchain
-      
-    | where :code:`$INSTALL_DIR` points to the base path of the FPGA toolchain install directory
-    |
-    | Initialize the conda env for the toolchain using:
-    
-    ::
-    
-     export PATH="$INSTALL_DIR/quicklogic-arch-defs/bin:$INSTALL_DIR/quicklogic-arch-defs/bin/python:$PATH"
-     source "$INSTALL_DIR/conda/etc/profile.d/conda.sh"
-     conda activate
+    - Build the :code:`qf_bootloader` app as usual using :code:`make` from :code:`qf_apps/qf_bootloader/GCC_Project` directory
+     
+    - | Flash the built bootloader bin using:
+      | :code:`qfprog --bootloader output/bin/qf_bootloader.bin --mode fpga-m4` from :code:`qf_apps/qf_bootloader/GCC_Project` directory
     
 
+  - Ensure to use the latest FPGA toolchain which supports generation of FPGA binary (v1.3.1 or above)
+    
 - Build:
 
   - Build as usual using :code:`make` from the :code:`GCC_Project` dir
@@ -175,6 +139,7 @@ Notes
 2. | Ensure that the FPGA power domain is not be switched off in the m4 code, as this will reset the FPGA configuration and any access into the FPGA will result in a hardfault.
    | This can be done in :code:`s3x_pwrcfg.c` where we set the value of :code:`cfg_state` field of the :code:`PI_FB` power domain to :code:`PI_NO_CFG` instead of the default :code:`PI_SET_SHDN`.
    |
+   | On a related note, ensure that the FPGA source clocks (C16, C21 for most designs) are set at a suitable frequency according to design, in the M4 code.
 
 3. | The pad configuration in the m4 code does not need to set any FPGA related pads, as it will be applied by the Bootloader automatically.
    | These can be removed from :code:`pincfg_table.c` (we have removed the pad config in the current test application).
