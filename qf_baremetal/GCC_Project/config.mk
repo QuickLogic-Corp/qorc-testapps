@@ -142,8 +142,10 @@ TMPVAR = $(subst ${DIR_SEP}, ,${APP_DIR})
 PROJ_NAME=$(word $(words ${TMPVAR}),${TMPVAR})
 export PROJ_NAME
 
-FIND_TOOL_DIR := $(subst arm-none-eabi-gcc: ,,$(shell whereis arm-none-eabi-gcc))
-export TC_PATH = $(subst /arm-none-eabi-gcc,,$(FIND_TOOL_DIR))
+ifndef QORC_TC_PATH
+FIND_TOOL_DIR := $(subst arm-none-eabi-gcc: ,,$(shell which arm-none-eabi-gcc))
+export QORC_TC_PATH = $(subst /arm-none-eabi-gcc,,$(FIND_TOOL_DIR))
+endif #QORC_TC_PATH
 
 # Allow TOOL to be provided on the command line
 # ie;   make -f Makefile TC_PATH=/some/path/
