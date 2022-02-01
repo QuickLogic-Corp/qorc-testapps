@@ -6,7 +6,7 @@ include config.mk
 
 VPATH:=$(OUTPUT_PATH)
 
-all: _makedirs_ external_srcs appfpga appdir
+all: _makedirs_ external_srcs appdir appfpga
 	-${HIDE}$(RM) $(OUTPUT_PATH)$(DIR_SEP)bin$(DIR_SEP)$(OUTPUT_FILE).*
 	make -f makefiles/Makefile_output
 	-${HIDE}$(MKDIR) $(OUTPUT_PATH)$(DIR_SEP)bin
@@ -24,7 +24,7 @@ _makedirs_:
 
 
 .PHONY: external_srcs
-external_srcs: Startup HAL FreeRTOS Libraries BSP FPGA
+external_srcs: Startup HAL FreeRTOS Libraries BSP
 	@echo "External sources built"
 
 .PHONY: appfpga
@@ -34,7 +34,7 @@ clean_appfpga:
 	make -f makefiles/Makefile_appfpga clean
 	
 CLEAN_TARGET += appfpga
-	
+
 .PHONY: appdir
 appdir:
 	make -f makefiles/Makefile_appdir
@@ -90,13 +90,6 @@ clean_Libraries:
 
 CLEAN_TARGET += Libraries
 
-.PHONY:FPGA
-FPGA:
-	make -f makefiles/Makefile_FPGA
-clean_FPGA:
-	make -f makefiles/Makefile_FPGA clean
-
-CLEAN_TARGET += BSP
 
 DELETEME=
 DELETEME += $(wildcard $(OUTPUT_PATH)$(DIR_SEP)bin$(DIR_SEP)$(OUTPUT_FILE).*)

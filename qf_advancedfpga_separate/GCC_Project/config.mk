@@ -85,7 +85,6 @@ _tmp2=$(subst /,\,${_tmp})
 # Resolve this once, now, thus we assign with := not =
 export PROJ_DIR := ${_tmp2}
 
-$(info PROJ_DIR = ${PROJ_DIR})
 export PROJ_ROOT=$(PROJ_DIR)\..\..\..
 export OUTPUT_PATH=output
 export DEPEND_PATH=output\depend
@@ -173,8 +172,15 @@ export ELF2BIN="$(QORC_TC_PATH)/arm-none-eabi-objcopy"
 ################
 endif
 ################
-
+$(info )
 $(info PROJ_NAME = ${PROJ_NAME})
+$(info )
+$(info PROJ_DIR = ${PROJ_DIR})
+$(info )
+$(info APP_DIR = ${APP_DIR})
+$(info )
+$(info )
+$(info )
 
 #Ouput binary name
 export OUTPUT_FILE=${PROJ_NAME}
